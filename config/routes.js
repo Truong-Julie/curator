@@ -25,6 +25,7 @@ module.exports = (app, express) => {
 
     client.get(`stack:${seedId}`, (err, savedStack) => {
       if (savedStack) {
+        console.log(savedStack, 'SAVED STACK');
         res.send(JSON.parse(savedStack));
       } else {
     //FIND GPS DATA FOR SEED PHOTO AND GET COORDS FOR ANTIPODAL POINT
@@ -60,7 +61,7 @@ module.exports = (app, express) => {
                 query.push('lat:' + id);
                 query.push('long:' + id);
                 query.push('url:' + id);
-              })
+              });
 
     //QUERY REDIS FOR LATS, LONGS AND URLS OF EACH PHOTO
               client.mget(query, (err, listResults) => {
